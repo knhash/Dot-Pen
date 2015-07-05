@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Color primary 500 from palette colors -->
+    <color name="red">#F44336</color>
+    <color name="blue">#2196f3</color>
+    <color name="yellow">#FFEB3B</color>
+    <!--Color primary dark 700 from palette colors -->
+    <color name="redDark">#D32F2F</color>
+    <color name="blueDark">#1976d2</color>
+    <color name="yellowDark">#FBC02D</color>
+    <!--Color ripple 300 from palette colors -->
+    <color name="redRipple">#e57373</color>
+    <color name="blueRipple">#64b5f6</color>
+    <color name="yellowRipple">#FFF176</color>
+
+    <color name="indigo">#3F51B5</color>
+</resources>
