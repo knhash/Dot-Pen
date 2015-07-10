@@ -1,13 +1,13 @@
 <resources>
-    <string name="app_name">The Clicker</string>
+    <string name="app_name">List Counter</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
     <string name="no_notes">No Notes Yet</string>
-    <string name="menu_insert">ADD KLICK</string>
-    <string name="menu_delete">DELETE KLICK</string>
-    <string name="menu_edit">EDIT KLICK</string>
-    <string name="title">I want to Klick...</string>
+    <string name="menu_insert">Add Note</string>
+    <string name="menu_delete">Delete Note</string>
+    <string name="menu_edit">Edit Note</string>
+    <string name="title">I want to count</string>
     <string name="body">0</string>
 </resources>
