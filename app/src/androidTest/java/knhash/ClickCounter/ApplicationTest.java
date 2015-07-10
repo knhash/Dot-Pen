@@ -1,4 +1,4 @@
-package knhash.track7;
+package knhash.ClickCounter;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

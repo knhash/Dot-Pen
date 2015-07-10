@@ -1,14 +1,12 @@
-package knhash.track7;
+package knhash.ClickCounter;
 
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.view.HapticFeedbackConstants;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.melnykov.fab.FloatingActionButton;
 
