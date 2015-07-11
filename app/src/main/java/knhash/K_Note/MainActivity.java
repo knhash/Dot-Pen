@@ -1,4 +1,4 @@
-package knhash.ClickCounter;
+package knhash.K_Note;
 
 import android.content.Intent;
 import android.database.Cursor;

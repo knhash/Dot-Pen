@@ -1,4 +1,4 @@
-package knhash.ClickCounter;
+package knhash.K_Note;
 
 import android.content.ContentValues;
 import android.content.Context;
