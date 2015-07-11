@@ -34,6 +34,9 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        getSupportActionBar().setHomeButtonEnabled(true);
+
         mDbHelper = new NotesDbAdapter(this);
         mDbHelper.open();
         final ListView listview = (ListView) findViewById(R.id.list);
@@ -143,6 +146,10 @@ public class MainActivity extends ActionBarActivity {
         fillData(listview);
     }
 
+    private EditText mTitleText;
+    private EditText mBodyText;
+    private Long mRowId;
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -163,6 +170,14 @@ public class MainActivity extends ActionBarActivity {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     Log.d("MainActivity", inputField.getText().toString());
+                    mDbHelper.open();
+                    String title = inputField.getText().toString();
+                    long id = mDbHelper.createNote(title, "0");
+                    if (id > 0) {
+                        mRowId = id;
+                    }
+                    ListView listview = (ListView) findViewById(R.id.list);
+                    fillData(listview);
                 }
             });
 
@@ -173,5 +188,11 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable(NotesDbAdapter.KEY_ROWID, mRowId);
     }
 }
