@@ -1,13 +1,18 @@
 package knhash.K_Note;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
@@ -62,7 +67,7 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-        listview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        /*listview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             public boolean onItemLongClick(AdapterView<?> parent, View view,
                                            int position, long id) {
                 mDbHelper.deleteNote(id);
@@ -70,7 +75,7 @@ public class MainActivity extends ActionBarActivity {
                 fillData(listview);
                 return true;
             }
-        });
+        });*/
     }
 
     private void fillData(ListView listview) {
@@ -99,7 +104,7 @@ public class MainActivity extends ActionBarActivity {
         return true;
     }
 
-    /*@Override
+    @Override
     public void onCreateContextMenu(ContextMenu menu, View v,
                                     ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
@@ -124,7 +129,7 @@ public class MainActivity extends ActionBarActivity {
                 startActivityForResult(i, ACTIVITY_EDIT);
         }
         return super.onContextItemSelected(item);
-    }*/
+    }
 
     private void createNote() {
         Intent i = new Intent(this, NoteEdit.class);
@@ -148,7 +153,22 @@ public class MainActivity extends ActionBarActivity {
         //noinspection SimplifiableIfStatement
 
         if (id == INSERT_ID) {
-            createNote();
+            //createNote();
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Add a note");
+            builder.setMessage("What do you want to do?");
+            final EditText inputField = new EditText(this);
+            builder.setView(inputField);
+            builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Log.d("MainActivity", inputField.getText().toString());
+                }
+            });
+
+            builder.setNegativeButton("Cancel",null);
+
+            builder.create().show();
             return true;
         }
 
