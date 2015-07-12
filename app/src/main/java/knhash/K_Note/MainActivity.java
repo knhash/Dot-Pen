@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -17,6 +18,7 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
 import com.melnykov.fab.FloatingActionButton;
+import com.afollestad.materialdialogs.MaterialDialog;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -161,29 +163,25 @@ public class MainActivity extends ActionBarActivity {
 
         if (id == INSERT_ID) {
             //createNote();
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Add a note");
-            builder.setMessage("What do you want to do?");
-            final EditText inputField = new EditText(this);
-            builder.setView(inputField);
-            builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    Log.d("MainActivity", inputField.getText().toString());
-                    mDbHelper.open();
-                    String title = inputField.getText().toString();
-                    long id = mDbHelper.createNote(title, "0");
-                    if (id > 0) {
-                        mRowId = id;
-                    }
-                    ListView listview = (ListView) findViewById(R.id.list);
-                    fillData(listview);
-                }
-            });
-
-            builder.setNegativeButton("Cancel",null);
-
-            builder.create().show();
+            new MaterialDialog.Builder(this)
+                    .title("Quicknote")
+                    .content("Add a new note")
+                    .inputType(InputType.TYPE_CLASS_TEXT)
+                    .input("", "", new MaterialDialog.InputCallback() {
+                        @Override
+                        public void onInput(MaterialDialog dialog, CharSequence input) {
+                            // Do something
+                            mDbHelper.open();
+                            String title = input.toString();
+                            long id = mDbHelper.createNote(title, "0");
+                            if (id > 0) {
+                                mRowId = id;
+                            }
+                            ListView listview = (ListView) findViewById(R.id.list);
+                            fillData(listview);
+                        }
+                    })
+                    .show();
             return true;
         }
 
