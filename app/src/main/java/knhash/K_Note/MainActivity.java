@@ -1,13 +1,10 @@
 package knhash.K_Note;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,7 +18,7 @@ import com.melnykov.fab.FloatingActionButton;
 import com.afollestad.materialdialogs.MaterialDialog;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
 
     private static final int ACTIVITY_CREATE=0;
     private static final int ACTIVITY_EDIT=1;
@@ -148,10 +145,6 @@ public class MainActivity extends ActionBarActivity {
         fillData(listview);
     }
 
-    private EditText mTitleText;
-    private EditText mBodyText;
-    private Long mRowId;
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -173,10 +166,7 @@ public class MainActivity extends ActionBarActivity {
                             // Do something
                             mDbHelper.open();
                             String title = input.toString();
-                            long id = mDbHelper.createNote(title, "0");
-                            if (id > 0) {
-                                mRowId = id;
-                            }
+                            mDbHelper.createNote(title, "0");
                             ListView listview = (ListView) findViewById(R.id.list);
                             fillData(listview);
                         }
@@ -186,11 +176,5 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putSerializable(NotesDbAdapter.KEY_ROWID, mRowId);
     }
 }

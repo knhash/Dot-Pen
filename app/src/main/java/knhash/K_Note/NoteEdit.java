@@ -37,9 +37,9 @@ public class NoteEdit extends ActionBarActivity {
         mBodyText = (EditText) findViewById(R.id.body);
 
         //Button confirmButton = (Button) findViewById(R.id.confirm);
-        FloatingActionButton fab1 = (FloatingActionButton) findViewById(R.id.plus);
+        /*FloatingActionButton fab1 = (FloatingActionButton) findViewById(R.id.plus);
         FloatingActionButton fab2 = (FloatingActionButton) findViewById(R.id.minus);
-        FloatingActionButton fab3 = (FloatingActionButton) findViewById(R.id.zero);
+        FloatingActionButton fab3 = (FloatingActionButton) findViewById(R.id.zero);*/
 
         mRowId = (savedInstanceState == null) ? null :
                 (Long) savedInstanceState.getSerializable(NotesDbAdapter.KEY_ROWID);
@@ -51,7 +51,7 @@ public class NoteEdit extends ActionBarActivity {
 
         populateFields();
 
-        fab2.setOnClickListener(new View.OnClickListener() {
+        /*fab2.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
                 String s = mBodyText.getText().toString();
@@ -87,7 +87,7 @@ public class NoteEdit extends ActionBarActivity {
                 //finish();
             }
 
-        });
+        });*/
 
         /*confirmButton.setOnClickListener(new View.OnClickListener() {
 

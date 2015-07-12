@@ -8,6 +8,6 @@
     <string name="menu_insert">Add Note</string>
     <string name="menu_delete">Delete Note</string>
     <string name="menu_edit">Edit Note</string>
-    <string name="title">I want to count</string>
-    <string name="body">0</string>
+    <string name="title">Give a title</string>
+    <string name="body">Note down stuff</string>
 </resources>
