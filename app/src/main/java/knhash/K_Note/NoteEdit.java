@@ -3,22 +3,27 @@ package knhash.K_Note;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.GravityEnum;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.melnykov.fab.FloatingActionButton;
 
 /**
  * Created by Hash on 11-04-2015.
  */
-public class NoteEdit extends ActionBarActivity {
+public class NoteEdit extends AppCompatActivity {
 
     private NotesDbAdapter mDbHelper;
     private EditText mTitleText;
     private EditText mBodyText;
+    private EditText mCountText;
     private Long mRowId;
 
     @Override
@@ -35,11 +40,9 @@ public class NoteEdit extends ActionBarActivity {
 
         mTitleText = (EditText) findViewById(R.id.title);
         mBodyText = (EditText) findViewById(R.id.body);
+        mCountText = (EditText) findViewById(R.id.counter);
 
-        //Button confirmButton = (Button) findViewById(R.id.confirm);
-        /*FloatingActionButton fab1 = (FloatingActionButton) findViewById(R.id.plus);
-        FloatingActionButton fab2 = (FloatingActionButton) findViewById(R.id.minus);
-        FloatingActionButton fab3 = (FloatingActionButton) findViewById(R.id.zero);*/
+        /*FloatingActionButton fab1 = (FloatingActionButton) findViewById(R.id.plus);*/
 
         mRowId = (savedInstanceState == null) ? null :
                 (Long) savedInstanceState.getSerializable(NotesDbAdapter.KEY_ROWID);
@@ -51,45 +54,7 @@ public class NoteEdit extends ActionBarActivity {
 
         populateFields();
 
-        /*fab2.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View view) {
-                String s = mBodyText.getText().toString();
-                int count = Integer.parseInt(s);
-                count--;
-                mBodyText.setText(String.valueOf(count));
-                setResult(RESULT_OK);
-                //finish();
-            }
-
-        });
-
-        fab1.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View view) {
-                String s = mBodyText.getText().toString();
-                int count = Integer.parseInt(s);
-                count++;
-                mBodyText.setText(String.valueOf(count));
-                setResult(RESULT_OK);
-                //finish();
-            }
-
-        });
-
-        fab3.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View view) {
-                String s = mBodyText.getText().toString();
-                int count = 0;
-                mBodyText.setText(String.valueOf(count));
-                setResult(RESULT_OK);
-                //finish();
-            }
-
-        });*/
-
-        /*confirmButton.setOnClickListener(new View.OnClickListener() {
+        /*fab1.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
                 String s = mBodyText.getText().toString();
@@ -160,24 +125,64 @@ public class NoteEdit extends ActionBarActivity {
         switch (keyCode) {
             case KeyEvent.KEYCODE_VOLUME_UP:
                 if (action == KeyEvent.ACTION_DOWN) {
-                    String s = mBodyText.getText().toString();
-                    int count = Integer.parseInt(s);
-                    count++;
-                    mBodyText.setText(String.valueOf(count));
-                    setResult(RESULT_OK);
+                    CountFunction();
                 }
                 return true;
             case KeyEvent.KEYCODE_VOLUME_DOWN:
                 if (action == KeyEvent.ACTION_DOWN) {
-                    String s = mBodyText.getText().toString();
+                    /*String s = mBodyText.getText().toString();
                     int count = Integer.parseInt(s);
                     count--;
                     mBodyText.setText(String.valueOf(count));
-                    setResult(RESULT_OK);
+                    setResult(RESULT_OK);*/
                 }
                 return true;
             default:
                 return super.dispatchKeyEvent(event);
         }
+    }
+
+    public void CountFunction(){
+        new MaterialDialog.Builder(this)
+                .title("Counter")
+                .content(mCountText.getText().toString())
+                .titleGravity(GravityEnum.CENTER)
+                .contentGravity(GravityEnum.CENTER)
+                .buttonsGravity(GravityEnum.CENTER)
+                .positiveText("PLUS")
+                .negativeText("MINUS")
+                .neutralText("ZERO")
+                .autoDismiss(false)
+                .callback(new MaterialDialog.ButtonCallback() {
+                    @Override
+                    public void onPositive(MaterialDialog dialog) {
+                        String s = mCountText.getText().toString();
+                        int count = Integer.parseInt(s);
+                        count++;
+                        dialog.setContent(String.valueOf(count));
+                        mCountText.setText(String.valueOf(count));
+                        setResult(RESULT_OK);
+                    }
+
+                    @Override
+                    public void onNegative(MaterialDialog dialog) {
+                        String s = mCountText.getText().toString();
+                        int count = Integer.parseInt(s);
+                        count--;
+                        dialog.setContent(String.valueOf(count));
+                        mCountText.setText(String.valueOf(count));
+                        setResult(RESULT_OK);
+                    }
+
+                    @Override
+                    public void onNeutral(MaterialDialog dialog) {
+                        int count = 0;
+                        dialog.setContent(String.valueOf(count));
+                        mCountText.setText(String.valueOf(count));
+                        setResult(RESULT_OK);
+                    }
+
+                })
+                .show();
     }
 }
