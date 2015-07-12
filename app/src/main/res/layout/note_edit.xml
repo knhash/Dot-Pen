@@ -18,11 +18,10 @@
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:hint="@string/title"
             android:gravity="left|center"
             android:paddingLeft="17dp"
             android:paddingRight="17dp"
-            android:background="#00000000"
+            android:background="#c8000000"
             android:textSize="@dimen/abc_text_size_medium_material" />
     <!--</android.support.v7.widget.CardView>-->
 
@@ -43,7 +42,6 @@
             android:paddingRight="17dp"
             android:paddingTop="17dp"
             android:background="#00000000"
-            android:hint="@string/body"
             android:textSize="@dimen/abc_text_size_small_material" />
 
     </ScrollView>

@@ -7,12 +7,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.ContextMenu;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.Toast;
 
 import com.melnykov.fab.FloatingActionButton;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -23,9 +25,9 @@ public class MainActivity extends AppCompatActivity {
     private static final int ACTIVITY_CREATE=0;
     private static final int ACTIVITY_EDIT=1;
 
-    private static final int INSERT_ID = Menu.FIRST;
-    private static final int DELETE_ID = Menu.FIRST + 1;
-    private static final int EDIT_ID = Menu.FIRST + 2;
+    private static final int COUNT_ID = Menu.FIRST;
+    private static final int DELETE_ID = Menu.FIRST + 2;
+    private static final int EDIT_ID = Menu.FIRST + 1;
 
     private NotesDbAdapter mDbHelper;
 
@@ -42,14 +44,14 @@ public class MainActivity extends AppCompatActivity {
         fillData(listview);
         registerForContextMenu(listview);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
                 createNote();
             }
 
-        });
+        });*/
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
@@ -86,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         startManagingCursor(mNotesCursor);
 
         // Create an array to specify the fields we want to display in the list (only TITLE)
-        String[] from = new String[]{NotesDbAdapter.KEY_TITLE,NotesDbAdapter.KEY_BODY};
+        String[] from = new String[]{NotesDbAdapter.KEY_TITLE,NotesDbAdapter.KEY_COUNT};
 
         // and an array of the fields we want to bind those fields to (in this case just text1)
         int[] to = new int[]{R.id.text1,R.id.text2};
@@ -100,17 +102,22 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        menu.add(0, INSERT_ID, 0, R.string.menu_insert);
-        return true;
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+
+        //super.onCreateOptionsMenu(menu);
+        //getMenuInflater().inflate(R.menu.menu_main, menu);
+        //menu.add(0, INSERT_ID, 0, R.string.menu_insert);
+        //return true;
     }
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v,
                                     ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-        menu.add(0, DELETE_ID, 0, R.string.menu_delete);
+        menu.add(0, COUNT_ID, 0, R.string.menu_count);
+        menu.add(2, DELETE_ID, 2, R.string.menu_delete);
         menu.add(1, EDIT_ID, 1, R.string.menu_edit);
     }
 
@@ -118,6 +125,9 @@ public class MainActivity extends AppCompatActivity {
     public boolean onContextItemSelected(MenuItem item) {
 
         switch(item.getItemId()) {
+            case COUNT_ID:
+                Toast.makeText(this, "ToDo : Counter", Toast.LENGTH_SHORT).show();
+                return true;
             case DELETE_ID:
                 AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
                 mDbHelper.deleteNote(info.id);
@@ -129,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent i = new Intent(MainActivity.this, NoteEdit.class);
                 i.putExtra(NotesDbAdapter.KEY_ROWID, info.id);
                 startActivityForResult(i, ACTIVITY_EDIT);
+                return true;
         }
         return super.onContextItemSelected(item);
     }
@@ -154,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
 
-        if (id == INSERT_ID) {
+        if (id == R.id.INSERT_QUICK) {
             //createNote();
             new MaterialDialog.Builder(this)
                     .title("Quicknote")
@@ -166,12 +177,17 @@ public class MainActivity extends AppCompatActivity {
                             // Do something
                             mDbHelper.open();
                             String title = input.toString();
-                            mDbHelper.createNote(title, "0");
+                            mDbHelper.createNote(title, "", "0");
                             ListView listview = (ListView) findViewById(R.id.list);
                             fillData(listview);
                         }
                     })
                     .show();
+            return true;
+        }
+
+        if (id == R.id.INSERT_NOTE) {
+            createNote();
             return true;
         }
 
