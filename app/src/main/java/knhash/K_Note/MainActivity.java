@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.GravityEnum;
 import com.melnykov.fab.FloatingActionButton;
 import com.afollestad.materialdialogs.MaterialDialog;
 
@@ -174,7 +175,6 @@ public class MainActivity extends AppCompatActivity {
                     .input("", "", new MaterialDialog.InputCallback() {
                         @Override
                         public void onInput(MaterialDialog dialog, CharSequence input) {
-                            // Do something
                             mDbHelper.open();
                             String title = input.toString();
                             mDbHelper.createNote(title, "", "0");
@@ -189,6 +189,15 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.INSERT_NOTE) {
             createNote();
             return true;
+        }
+
+        if (id == R.id.ABOUT) {
+            new MaterialDialog.Builder(this)
+                    .title(R.string.abtitle)
+                    .content(R.string.abcontent)
+                    .contentGravity(GravityEnum.CENTER)
+                    .icon(getResources().getDrawable(R.mipmap.ic_launcher))
+                    .show();
         }
 
         return super.onOptionsItemSelected(item);
