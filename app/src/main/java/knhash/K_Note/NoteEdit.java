@@ -120,7 +120,7 @@ public class NoteEdit extends AppCompatActivity {
 
         else if (title.equals("") && !body.equals("")){
             Toast.makeText(this, "Note titled by Dot Pen", Toast.LENGTH_SHORT).show();
-            String temptitle = " Dot Note";
+            String temptitle = "Dot Note";
             long id = mDbHelper.createNote(temptitle, body, count);
             if (id > 0) {
                 mRowId = id;
