@@ -1,6 +1,6 @@
 
 
-#**Dot Note**
+#**Dot Pen**
 
 
 An open-source **Note-taking app** that knows how to **count** stuff as well. 
