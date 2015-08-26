@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
                         public void onInput(MaterialDialog dialog, CharSequence input) {
                             mDbHelper.open();
                             String title = input.toString();
-                            mDbHelper.createNote(title, "", "0");
+                            mDbHelper.createNote(title, "", "");
                             ListView listview = (ListView) findViewById(R.id.list);
                             fillData(listview);
                         }
@@ -195,7 +195,8 @@ public class MainActivity extends AppCompatActivity {
             new MaterialDialog.Builder(this)
                     .title(R.string.abtitle)
                     .content(R.string.abcontent)
-                    .contentGravity(GravityEnum.CENTER)
+                    .titleGravity(GravityEnum.START)
+                    .contentGravity(GravityEnum.END)
                     .icon(getResources().getDrawable(R.mipmap.ic_launcher))
                     .show();
         }

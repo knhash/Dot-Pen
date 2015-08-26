@@ -16,6 +16,7 @@
 
         <EditText
             android:id="@+id/title"
+            android:hint="Title"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="left|center"
@@ -35,6 +36,7 @@
 
         <EditText
             android:id="@+id/body"
+            android:hint="Note"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="left"
@@ -46,11 +48,10 @@
 
     </ScrollView>
 
-    <EditText
+    <TextView
         android:id="@+id/counter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="number"
         android:gravity="center"
         android:ems="10"
         android:text="0"

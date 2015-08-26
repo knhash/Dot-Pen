@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="@dimen/abc_action_bar_default_height_material">
+    android:layout_height="70dp">
 
     <!--<android.support.v7.widget.CardView
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -12,7 +12,7 @@
 
     </android.support.v7.widget.CardView>-->
 
-    <TextView
+    <!--<TextView
         android:layout_width="100dp"
         android:layout_height="match_parent"
         android:background="#00000000"
@@ -34,6 +34,28 @@
         android:paddingLeft="17dp"
         android:layout_alignParentTop="true"
         android:layout_toLeftOf="@+id/text2"
-        android:layout_toStartOf="@+id/text2" />
+        android:layout_toStartOf="@+id/text2" />-->
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="#00000000"
+        android:id="@+id/text1"
+        android:layout_gravity="center"
+        android:paddingLeft="17dp"
+        android:paddingTop="10dp"
+        android:textSize="@dimen/abc_text_size_title_material"
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="#00000000"
+        android:id="@+id/text2"
+        android:layout_gravity="center"
+        android:paddingLeft="17dp"
+        android:paddingBottom="10dp"
+        android:layout_below="@+id/text1"
+        android:textSize="@dimen/abc_text_size_caption_material" />
 
 </RelativeLayout>

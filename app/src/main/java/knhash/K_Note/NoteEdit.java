@@ -13,12 +13,16 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.GravityEnum;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.melnykov.fab.FloatingActionButton;
+
+import java.text.DateFormat;
+import java.util.Date;
 
 /**
  * Created by Hash on 11-04-2015.
@@ -28,7 +32,7 @@ public class NoteEdit extends AppCompatActivity {
     private NotesDbAdapter mDbHelper;
     private EditText mTitleText;
     private EditText mBodyText;
-    private EditText mCountText;
+    private TextView mCountText;
     private Long mRowId;
 
     @Override
@@ -45,7 +49,7 @@ public class NoteEdit extends AppCompatActivity {
 
         mTitleText = (EditText) findViewById(R.id.title);
         mBodyText = (EditText) findViewById(R.id.body);
-        mCountText = (EditText) findViewById(R.id.counter);
+        mCountText = (TextView) findViewById(R.id.counter);
 
         /*FloatingActionButton fab1 = (FloatingActionButton) findViewById(R.id.plus);*/
 
@@ -108,6 +112,12 @@ public class NoteEdit extends AppCompatActivity {
     private void saveState() {
         String title = mTitleText.getText().toString();
         String body = mBodyText.getText().toString();
+
+
+        Date date = new Date();
+        String Date= DateFormat.getDateTimeInstance().format(date);
+        mCountText.setText(Date);
+
         String count = mCountText.getText().toString();
 
         if (mRowId == null && !title.equals("")) {
@@ -139,7 +149,7 @@ public class NoteEdit extends AppCompatActivity {
         }
     }
 
-    @Override
+    /*@Override
     public boolean dispatchKeyEvent(KeyEvent event) {
         int action = event.getAction();
         int keyCode = event.getKeyCode();
@@ -157,7 +167,7 @@ public class NoteEdit extends AppCompatActivity {
             default:
                 return super.dispatchKeyEvent(event);
         }
-    }
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -167,7 +177,7 @@ public class NoteEdit extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    @Override
+    /*@Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -227,5 +237,5 @@ public class NoteEdit extends AppCompatActivity {
 
                 })
                 .show();
-    }
+    }*/
 }
