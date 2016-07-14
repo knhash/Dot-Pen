@@ -40,5 +40,3 @@ Don't want to share? That's all right, you can use this project for your own app
 ![Counter](http://i.imgur.com/VnVeTfb.png)
 
 ![Quicknote](http://i.imgur.com/DyGjWIb.png)
-
-> Written with [StackEdit](https://stackedit.io/).
