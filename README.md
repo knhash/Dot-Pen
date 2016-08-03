@@ -32,8 +32,11 @@ Don't want to share? That's all right, you can use this project for your own app
 
 ----------
 **Screenshots**
-<img src="http://i.imgur.com/C3Ag1l0.png" height="200px" />
-<img src="http://i.imgur.com/seToZfR.png" height="200px" />
-<img src="http://i.imgur.com/VnVeTfb.png" height="200px" />
-<img src="http://i.imgur.com/DyGjWIb.png" height="200px" />
-![Quicknote]()
+
+![Main Screen](http://i.imgur.com/C3Ag1l0.png)
+
+![Note screen](http://i.imgur.com/seToZfR.png)
+
+![Counter](http://i.imgur.com/VnVeTfb.png)
+
+![Quicknote](http://i.imgur.com/DyGjWIb.png)
